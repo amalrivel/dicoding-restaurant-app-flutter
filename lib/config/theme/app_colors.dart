@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // Light theme colors
-  static const Color primaryLight = Color(0xFFF57C00); // Amber 700
-  static const Color secondaryLight = Color(0xFFFFB74D); // Amber 300
+  static const Color primaryLight = Color(0xFFD32F2F); // Rich Red
+  static const Color secondaryLight = Color(0xFF388E3C); // Green
   static const Color backgroundLight = Color(0xFFFFFFFF);
   static const Color surfaceLight = Color(0xFFFFFFFF);
   static const Color errorLight = Color(0xFFB00020);
@@ -13,8 +13,8 @@ class AppColors {
   static const Color cardLight = Color(0xFFFFFFFF);
 
   // Dark theme colors
-  static const Color primaryDark = Color(0xFFFFB74D); // Amber 300
-  static const Color secondaryDark = Color(0xFFF57C00); // Amber 700
+  static const Color primaryDark = Color(0xFFFF5252); // Lighter Red
+  static const Color secondaryDark = Color(0xFF4CAF50); // Lighter Green
   static const Color backgroundDark = Color(0xFF121212);
   static const Color surfaceDark = Color(0xFF1E1E1E);
   static const Color errorDark = Color(0xFFCF6679);
