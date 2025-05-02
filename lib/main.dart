@@ -1,12 +1,24 @@
 import 'package:dicoding_restaurant_app/config/theme/app_theme.dart';
+import 'package:dicoding_restaurant_app/data/repositories/restaurant_repository.dart';
+import 'package:dicoding_restaurant_app/data/services/api_service.dart';
+import 'package:dicoding_restaurant_app/providers/restaurant_provider.dart';
 import 'package:dicoding_restaurant_app/providers/theme_provider.dart';
+import 'package:dicoding_restaurant_app/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => ThemeProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(
+          create:
+              (_) => RestaurantProvider(
+                repository: RestaurantRepository(apiService: ApiService()),
+              ),
+        ),
+      ],
       child: const MyApp(),
     ),
   );
@@ -20,11 +32,11 @@ class MyApp extends StatelessWidget {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
         return MaterialApp(
-          title: 'Restaurant App',
+          title: 'Dicoding Restaurant App',
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: themeProvider.themeState.themeMode,
-          home: const HomePage(title: 'Restaurant App'),
+          home: const HomeScreen(),
           debugShowCheckedModeBanner: false,
         );
       },
@@ -51,20 +63,18 @@ class HomePage extends StatelessWidget {
             onSelected: (value) {
               themeProvider.setThemeByName(value);
             },
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: 'light',
-                child: Text('Light Theme'),
-              ),
-              const PopupMenuItem(
-                value: 'dark',
-                child: Text('Dark Theme'),
-              ),
-              const PopupMenuItem(
-                value: 'system',
-                child: Text('System Theme'),
-              ),
-            ],
+            itemBuilder:
+                (context) => [
+                  const PopupMenuItem(
+                    value: 'light',
+                    child: Text('Light Theme'),
+                  ),
+                  const PopupMenuItem(value: 'dark', child: Text('Dark Theme')),
+                  const PopupMenuItem(
+                    value: 'system',
+                    child: Text('System Theme'),
+                  ),
+                ],
           ),
         ],
       ),
