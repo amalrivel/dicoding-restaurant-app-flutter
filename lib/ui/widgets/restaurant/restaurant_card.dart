@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dicoding_restaurant_app/data/models/restaurant.dart';
 import 'package:dicoding_restaurant_app/data/services/image_url_builder.dart';
+import 'package:dicoding_restaurant_app/config/constants/app_constants.dart';
 
 class RestaurantCardWidget extends StatelessWidget {
   final Restaurant restaurant;
@@ -13,8 +14,13 @@ class RestaurantCardWidget extends StatelessWidget {
     
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppConstants.cardBorderRadius),
+      ),
+      margin: const EdgeInsets.symmetric(
+        horizontal: AppConstants.defaultPadding,
+        vertical: 8,
+      ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () {
@@ -36,11 +42,11 @@ class RestaurantCardWidget extends StatelessWidget {
                   tag: restaurant.id,
                   child: Image.network(
                     ImageUrlBuilder.medium(restaurant.pictureId),
-                    height: 160,
+                    height: AppConstants.imageHeight,
                     width: double.infinity,
                     fit: BoxFit.cover,
                     errorBuilder: (ctx, error, _) => Container(
-                      height: 160,
+                      height: AppConstants.imageHeight,
                       color: theme.colorScheme.surfaceVariant,
                       child: Center(
                         child: Icon(
@@ -85,7 +91,7 @@ class RestaurantCardWidget extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.location_on,
-                          size: 14,
+                          size: AppConstants.locationIconSize,
                           color: theme.colorScheme.primary,
                         ),
                         const SizedBox(width: 4),
@@ -113,9 +119,9 @@ class RestaurantCardWidget extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.star,
-                          size: 14,
+                          size: AppConstants.ratingIconSize,
                           color: Colors.white,
                         ),
                         const SizedBox(width: 4),
@@ -133,9 +139,9 @@ class RestaurantCardWidget extends StatelessWidget {
                 
                 // Restaurant name at bottom of image
                 Positioned(
-                  left: 16,
-                  right: 16,
-                  bottom: 16,
+                  left: AppConstants.defaultPadding,
+                  right: AppConstants.defaultPadding,
+                  bottom: AppConstants.defaultPadding,
                   child: Text(
                     restaurant.name,
                     style: theme.textTheme.titleMedium?.copyWith(
@@ -154,17 +160,6 @@ class RestaurantCardWidget extends StatelessWidget {
                 ),
               ],
             ),
-            
-            // Description preview
-            // Padding(
-            //   padding: const EdgeInsets.all(12),
-            //   child: Text(
-            //     restaurant.description,
-            //     style: theme.textTheme.bodyMedium,
-            //     maxLines: 2,
-            //     overflow: TextOverflow.ellipsis,
-            //   ),
-            // ),
           ],
         ),
       ),

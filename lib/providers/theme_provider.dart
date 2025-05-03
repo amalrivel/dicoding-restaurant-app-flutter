@@ -22,7 +22,7 @@ class ThemeProvider extends ChangeNotifier {
   Future<void> _loadThemePreference() async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final String themeName = prefs.getString(THEME_KEY) ?? 'light';
+      final String themeName = prefs.getString(THEME_KEY) ?? 'system';
 
       // Convert string to ThemeState using factory constructor
       _themeState = ThemeState.fromName(themeName);
